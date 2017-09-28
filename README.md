@@ -7,14 +7,14 @@ SmartThings and the device handlers will help keept the device state in sync on 
 
 Indigo ultimately manages the devices, but SmartThings can control the devices and get their status. 
 
-##Requirements
+## Requirements
 
 * Apple Mac computer running Indigo Domotics Server 7.0+, with REST services enabled
 * Insteon devices (designed for lighting, should work with anything switched
 * SmartThings Hub (duh)
 * Knowledge of using triggers in Indigo 7.0+ when device state changes
  
-##Architecture
+## Architecture
 
 The device handlers allow the user to create devices in SmartThings corresponding to the lighting (or switched) 
 Insteon devices.  The intention is that the device handler could control the device and the REST server on Indigo
@@ -25,18 +25,18 @@ But as usual, things didn't quite work that way.  The device handlers were unabl
 Enter the SmartApp:  It establishes an endpoint that allows Indigo to send device status to SmartThings, pretty much acting like a callback.  It is called by triggers in Indigo that sense when an applicable device has changed and then 
 initiates an HTTP GET to your ST hub to update the state of the corresponding device in HT by calling the devices refresh() command.
 
-##Device Handlers
+## Device Handlers
 
 * dimmer-insteon-rest : Intended for devices that support dimming
 * switch-insteon-rest : Intended for devices that only support on/off functionality
 
-##SmartApp
+## SmartApp
 
 * insteon-status-grabber : Sets up the endpoint on your ST hub and allows calls that update your corresponding
 devices in SmartThings.
 
-###TODO:
+### TODO 28 Sep 2017:
 
 * Would like to initiate refresh from the devices on the SmartThings side
 * Need to allow users to specify their own device maps in the SmartApp (or dispense with the map altogether)
-* Iron out the OAuth process for any other users
+* Iron out and document the OAuth process for any other users
