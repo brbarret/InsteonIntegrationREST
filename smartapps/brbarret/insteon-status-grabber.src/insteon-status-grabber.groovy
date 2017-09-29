@@ -12,6 +12,11 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
+ * VERSION HISTORY
+ * 2017-09-19 : 1.0 BETA : Initial Version
+ * 2017-09-27 : 1.1 BETA : First version published on GitHub
+ * 2017-09-29 : 1.2 : Code cleanup.  Removed hash map construct, so user will now have to put actual ST device name in REST call in Indigo trigger.
+ * 
  */
 definition(
     name: "Insteon Status Grabber",
@@ -84,19 +89,13 @@ def showState() {
     
     //log.debug("Device parameter: ${params.device}, deviceMap -> ${deviceMap()}")
     // get the device from the list
-    def thisDevice = theSwitches.find{it.name == deviceMap().get(params.device)} 
+    def thisDevice = theSwitches.find{it.name == params.device} 
     def deviceState = params.state
     log.debug("Device info: ${thisDevice?.getDeviceNetworkId()}")
     log.debug("The device ${thisDevice} is ${deviceState}")
     
     thisDevice.refresh("${deviceState}")
 }
-
-// Mapping of names from the Indigo Server to the names that are (will be) used for the device in ST
-def deviceMap() { return ['Office Torchiere':'Study', 'Loft Lamp':'Loft', 'Bird Cage':'Bird Cage', 'Bedside Lamps':'Bedside',
-			'Front Porch':'Front Porch', 'Garage Lights':'Garage Outdoor Lights', 'Screen Porch':'Screen Porch', 'Mud Room': 'Mud Room', 'FR Table Lamp':'Family Room 1',
-            'FR Floor Lamp': 'Family Room 2', 'Front Spot':'Front Spot', 'Game Room 1': 'Game Room 1', 'Game Room 2': 'Game Room 2',
-            'MBR Stick Lamp': 'MBR Stick Lamp'] }
 
 def controlDevice() {}
 
