@@ -1,4 +1,6 @@
 # InsteonIntegrationREST
+
+29 September 2017 - Version 1.2 for General Release
 SmartThings device handlers and SmartApp to facilitate integration between SmartThings and Insteon devices running on Indigo.
 
 These tools allow a user to create devices in SmartThings corresponding to your Insteon lighting devices 
@@ -38,5 +40,5 @@ devices in SmartThings.
 ### TODO 28 Sep 2017:
 
 * Would like to initiate refresh from the devices on the SmartThings side
-* Need to allow users to specify their own device maps in the SmartApp (or dispense with the map altogether)
+* Need to allow users to specify their own device maps in the SmartApp (or dispense with the map altogether) **DONE 29 Sep**
 * Iron out and document the OAuth process for any other users
