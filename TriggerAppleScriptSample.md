@@ -2,16 +2,16 @@
 
 ##Use this for dimmers
 
-set deviceName to "Bedside Lamps"
+set deviceName to "Front Porch"
 tell application "IndigoServer"
 status request deviceName
 delay 2 -- the status request is asynchronous, so you need to wait a second or two for the reply
 set deviceStatus to (brightness of device deviceName as string)
 end tell
 
-set deviceName to "Bedside%20Lamps"
+set stDeviceName to "Front%20Porch" -- This is the actual name of the device in SmartThings Hub, URLEncoded
 
-do shell script "curl -H \"Authorization: Bearer <your-auth-token>\" -X GET \"<your-endpoint-path>/statusreport/" & deviceName & "/" & deviceStatus & "\""
+do shell script "curl -H \"Authorization: Bearer <your-auth-token>\" -X GET \"<your-endpoint-path>/statusreport/" & stDeviceName & "/" & deviceStatus & "\""
 
 
 ##Use this for on/off switches
@@ -29,6 +29,6 @@ else
 set deviceStatus to "Off"
 end if
 
-set deviceName to "Office%20Torchiere"
+set stDeviceName to "Study" -- This is the actual name of the device in SmartThings Hub, URLEncoded
 
-do shell script "curl -H \"Authorization: Bearer <your-auth-token>\" -X GET \"<your-endpoint-path>/statusreport/" & deviceName & "/" & deviceStatus & "\""
+do shell script "curl -H \"Authorization: Bearer <your-auth-token>\" -X GET \"<your-endpoint-path>/statusreport/" & stDeviceName & "/" & deviceStatus & "\""
