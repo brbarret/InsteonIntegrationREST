@@ -11,7 +11,12 @@
  *  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
- *
+ * 
+ * VERSION HISTORY
+ * 2017-09-19 : 1.0 BETA : Initial Version
+ * 2017-09-27 : 1.1 BETA : First version published on GitHub
+ * 2017-09-29 : 1.2 : Code cleanup
+ * 
  */
 metadata {
 	definition (name: "Dimmer_Insteon_REST", namespace: "brbarret", author: "Brandt Barretto") {
@@ -57,7 +62,7 @@ metadata {
         input "port", "string", title: "Port", description: "Port used by Indigo Server", 
         	required: true, displayDuringSetup: true
             
-        input "theDevice", "string", title: "Path", description: "Device to control", 
+        input "theDevice", "string", title: "Path", description: "Device to control, please URLEncode the string and match the device name in Indigo (i.e. - My%20Light)", 
         	required: true, displayDuringSetup: true
     }
 }
@@ -95,7 +100,6 @@ private setDimmerLevel(value) {
 	}
 	sendEvent(name: "level", value: value, unit: "%")
     def result = sendEthernet("brightness=${value}", ip, port)
-    //def result = sendInternet("isOn=true")
     log.debug "Result is: ${result}"
 
     return result

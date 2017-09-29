@@ -12,8 +12,12 @@
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
  *
+ * VERSION HISTORY
+ * 2017-09-19 : 1.0 BETA : Initial Version
+ * 2017-09-27 : 1.1 BETA : First version published on GitHub
+ * 2017-09-29 : 1.2 : Code cleanup
+ * 
  */
-import groovy.json.JsonSlurper
  
 metadata {
 	definition (name: "Switch_Insteon_REST", namespace: "brbarret", author: "Brandt Barretto") {
@@ -50,7 +54,7 @@ metadata {
         input "port", "string", title: "Port", description: "Port used by Indigo Server", 
         	required: true, displayDuringSetup: true
             
-        input "theDevice", "string", title: "Path", description: "Device to control", 
+        input "theDevice", "string", title: "Path", description: "Device to control, please URLEncode the string and match the device name in Indigo (i.e. - My%20Light)", 
         	required: true, displayDuringSetup: true
             
     }
@@ -68,9 +72,6 @@ def parse(String description) {
     def status = msg.status          // => http status code of the response
     def json = msg.json              // => any JSON included in response body, as a data structure of lists and maps
     def xml = msg.xml                // => any XML included in response body, as a document tree structure
-    def data = msg.data
-    def slurper = new JsonSlurper()
-    def slurpee = slurper.parseText(body)
     log.debug "Parsed ${msg}"
 }
 
